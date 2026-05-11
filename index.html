@@ -1,379 +1,366 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DJ Artist Page</title>
+  <meta name="description" content="One-page electronic artist website with info, about, releases, EPK, and social links." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --bg: #f7f6f2;
+      --surface: #fbfbf8;
+      --surface-2: #efede7;
+      --text: #201d18;
+      --muted: #6e6b65;
+      --line: rgba(32,29,24,.12);
+      --accent: #0f7a7a;
+      --accent-2: #d7ebe8;
+      --radius: 18px;
+      --shadow: 0 12px 40px rgba(0,0,0,.08);
+    }
+    [data-theme="dark"] {
+      --bg: #111111;
+      --surface: #171717;
+      --surface-2: #202020;
+      --text: #f3f1eb;
+      --muted: #a8a39a;
+      --line: rgba(255,255,255,.10);
+      --accent: #66c7c4;
+      --accent-2: rgba(102,199,196,.12);
+      --shadow: 0 18px 48px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: radial-gradient(circle at top, rgba(102,199,196,.08), transparent 30%), var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, iframe { max-width: 100%; }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    .skip-link {
+      position: absolute; left: -9999px; top: auto;
+    }
+    .skip-link:focus {
+      left: 16px; top: 16px; background: var(--surface); padding: 10px 14px; border-radius: 999px; z-index: 1000;
+    }
+    header {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(16px);
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 74px; gap: 20px;
+    }
+    .logo {
+      display: inline-flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: .92rem;
+    }
+    .logo svg { width: 34px; height: 34px; }
+    nav ul {
+      list-style: none; display: flex; gap: 18px; flex-wrap: wrap; justify-content: flex-end;
+    }
+    nav a { color: var(--muted); font-size: .95rem; transition: color .15s; }
+    nav a:hover, nav a:focus-visible { color: var(--text); }
+    .theme-btn, .button {
+      border: 1px solid var(--line); background: var(--surface); color: var(--text);
+      border-radius: 999px; min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      cursor: pointer; font-family: inherit; font-size: .95rem; transition: opacity .15s, transform .1s;
+    }
+    .theme-btn:hover, .button:hover { opacity: .85; }
+    .theme-btn:active, .button:active { transform: scale(.97); }
+    .button.primary { background: var(--accent); color: #081111; border-color: transparent; font-weight: 700; }
+    .hero {
+      padding: 88px 0 52px;
+      display: grid; grid-template-columns: 1.3fr .9fr; gap: 28px; align-items: stretch;
+    }
+    .hero-card, .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-card {
+      padding: 34px;
+      min-height: 420px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      background:
+        linear-gradient(180deg, rgba(102,199,196,.10), transparent 30%),
+        var(--surface);
+    }
+    .kicker { color: var(--accent); text-transform: uppercase; letter-spacing: .16em; font-size: .78rem; margin-bottom: 16px; }
+    h1, h2 { font-family: 'Instrument Serif', serif; font-weight: 400; line-height: 1.02; }
+    h1 { font-size: clamp(3rem, 8vw, 6.5rem); max-width: 8ch; }
+    .lead { font-size: 1.08rem; color: var(--muted); max-width: 55ch; margin-top: 18px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+    .info-grid {
+      display: grid; gap: 14px; padding: 24px;
+    }
+    .stat {
+      padding: 18px; border: 1px solid var(--line); border-radius: calc(var(--radius) - 6px); background: var(--surface-2);
+    }
+    .stat strong { display: block; font-size: .82rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 6px; }
+    section { padding: 16px 0 22px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 18px; }
+    h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
+    .section-copy { color: var(--muted); max-width: 65ch; }
+    .about {
+      display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px;
+    }
+    .panel { padding: 28px; }
+    .list { list-style: none; display: grid; gap: 14px; }
+    .list li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .list li:last-child { border-bottom: 0; }
+    .release-grid, .epk-grid, .social-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 24px;
+    }
+    .tag {
+      display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 999px; background: var(--accent-2); color: var(--accent); font-size: .82rem; margin-bottom: 14px;
+    }
+    .release-card h3, .epk-card h3, .social-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+    .muted { color: var(--muted); }
+    .epk-items { list-style: none; display: grid; gap: 10px; margin-top: 14px; }
+    .epk-items li::before { content: "• "; color: var(--accent); }
+    .social-embed {
+      width: 100%; min-height: 380px; border: 0; border-radius: 14px; background: var(--surface-2);
+    }
+    .footer {
+      padding: 42px 0 80px; color: var(--muted); font-size: .95rem;
+    }
+    .footer-box {
+      display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+      padding: 20px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+    }
+    @media (max-width: 900px) {
+      .hero, .about, .release-grid, .epk-grid, .social-grid { grid-template-columns: 1fr; }
+      .nav { align-items: flex-start; padding: 16px 0; flex-direction: column; }
+      nav ul { justify-content: flex-start; }
+      h1 { max-width: 10ch; }
+    }
+    @media (max-width: 640px) {
+      .hero-card, .panel { padding: 22px; }
+      .hero { padding-top: 54px; }
+      .social-embed { min-height: 320px; }
+    }
   </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en" data-theme="dark"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;DJ Artist Page&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="description" content="One-page electronic artist website with info, about, releases, EPK, and social links." /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>:root, [data-theme="light"] {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--bg: #f7f6f2;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--surface: #fbfbf8;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--surface-2: #efede7;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--text: #201d18;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--muted: #6e6b65;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--line: rgba(32,29,24,.12);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--accent: #0f7a7a;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--accent-2: #d7ebe8;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--radius: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--shadow: 0 12px 40px rgba(0,0,0,.08);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>[data-theme="dark"] {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--bg: #111111;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--surface: #171717;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--surface-2: #202020;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--text: #f3f1eb;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--muted: #a8a39a;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--line: rgba(255,255,255,.10);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--accent: #66c7c4;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--accent-2: rgba(102,199,196,.12);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--shadow: 0 18px 48px rgba(0,0,0,.35);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>* { box-sizing: border-box; margin: 0; padding: 0; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>html { scroll-behavior: smooth; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-family: 'Space Grotesk', sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: radial-gradient(circle at top, rgba(102,199,196,.08), transparent 30%), var(--bg);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.6;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>a { color: inherit; text-decoration: none; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>img, iframe { max-width: 100%; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.skip-link {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>position: absolute; left: -9999px; top: auto;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.skip-link:focus {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>left: 16px; top: 16px; background: var(--surface); padding: 10px 14px; border-radius: 999px; z-index: 1000;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>header {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>position: sticky; top: 0; z-index: 20;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>backdrop-filter: blur(16px);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: color-mix(in srgb, var(--bg) 78%, transparent);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-bottom: 1px solid var(--line);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.nav {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex; align-items: center; justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>min-height: 74px; gap: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.logo {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: inline-flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: .92rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.logo svg { width: 34px; height: 34px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>nav ul {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>list-style: none; display: flex; gap: 18px; flex-wrap: wrap; justify-content: flex-end;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>nav a { color: var(--muted); font-size: .95rem; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>nav a:hover, nav a:focus-visible { color: var(--text); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.theme-btn, .button {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--line); background: var(--surface); color: var(--text);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 999px; min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; gap: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.button.primary { background: var(--accent); color: #081111; border-color: transparent; font-weight: 700; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 88px 0 52px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid; grid-template-columns: 1.3fr .9fr; gap: 28px; align-items: stretch;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-card, .panel {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: var(--surface);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid var(--line);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: var(--radius);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: var(--shadow);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-card {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 34px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>min-height: 420px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex; flex-direction: column; justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background:</p>
-<p class="p1"><span class="Apple-converted-space">        </span>linear-gradient(180deg, rgba(102,199,196,.10), transparent 30%),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>var(--surface);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.kicker { color: var(--accent); text-transform: uppercase; letter-spacing: .16em; font-size: .78rem; margin-bottom: 16px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>h1, h2 { font-family: 'Instrument Serif', serif; font-weight: 400; line-height: 1.02; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>h1 { font-size: clamp(3rem, 8vw, 6.5rem); max-width: 8ch; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.lead { font-size: 1.08rem; color: var(--muted); max-width: 55ch; margin-top: 18px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.info-grid {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid; gap: 14px; padding: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.stat {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 18px; border: 1px solid var(--line); border-radius: calc(var(--radius) - 6px); background: var(--surface-2);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.stat strong { display: block; font-size: .82rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 6px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>section { padding: 16px 0 22px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.section-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 18px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>h2 { font-size: clamp(2rem, 4vw, 3.5rem); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.section-copy { color: var(--muted); max-width: 65ch; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.about {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.panel { padding: 28px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.list { list-style: none; display: grid; gap: 14px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.list li { padding: 14px 0; border-bottom: 1px solid var(--line); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.list li:last-child { border-bottom: 0; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.release-grid, .epk-grid, .social-grid {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.tag {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 999px; background: var(--accent-2); color: var(--accent); font-size: .82rem; margin-bottom: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.release-card h3, .epk-card h3, .social-card h3 { font-size: 1.2rem; margin-bottom: 10px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.muted { color: var(--muted); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.epk-items { list-style: none; display: grid; gap: 10px; margin-top: 14px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.epk-items li::before { content: "• "; color: var(--accent); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.social-embed {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%; min-height: 380px; border: 0; border-radius: 14px; background: var(--surface-2);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 42px 0 80px; color: var(--muted); font-size: .95rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.footer-box {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 20px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>@media (max-width: 900px) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.hero, .about, .release-grid, .epk-grid, .social-grid { grid-template-columns: 1fr; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.nav { align-items: flex-start; padding: 16px 0; flex-direction: column; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>nav ul { justify-content: flex-start; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>h1 { max-width: 10ch; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>@media (max-width: 640px) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.hero-card, .panel { padding: 22px; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.hero { padding-top: 54px; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.social-embed { min-height: 320px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;a href="#main" class="skip-link"&gt;Skip to content&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="wrap nav"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;a class="logo" href="#top" aria-label="Artist home"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;svg viewBox="0 0 48 48" fill="none" aria-hidden="true"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2"&gt;&lt;/circle&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;path d="M15 28c4-10 14-10 18 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"&gt;&lt;/path&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;circle cx="24" cy="18" r="3.5" fill="currentColor"&gt;&lt;/circle&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>Artist Name</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;nav aria-label="Main navigation"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;li&gt;&lt;a href="#info"&gt;Info&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;li&gt;&lt;a href="#releases"&gt;Releases&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;li&gt;&lt;a href="#epk"&gt;EPK&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;li&gt;&lt;a href="#socials"&gt;Socials&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/nav&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="theme-btn" type="button" data-theme-toggle aria-label="Switch theme"&gt;◐&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;main id="main"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="top"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="wrap hero"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="hero-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="kicker"&gt;DJ / Producer / Curator&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1&gt;Your Artist Name&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="lead"&gt;A clean one-page site for your artist identity, bookings, releases, and press information. Replace this intro with a short line about your sound, city, and current direction.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="hero-actions"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;a class="button primary" href="https://soundcloud.com/" target="_blank" rel="noopener noreferrer"&gt;SoundCloud&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;a class="button" href="https://instagram.com/" target="_blank" rel="noopener noreferrer"&gt;Instagram&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p class="muted"&gt;Available for club sets, private events, branded activations, and curated music programming.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;aside class="hero-card info-grid" id="info" aria-label="Artist info"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Base&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;Bangkok, Thailand&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Style&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;Deep, progressive, afro house, melodic techno&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Booking&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;booking@email.com&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Highlights&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span&gt;Residencies, guest sets, branded events, beach clubs, rooftops&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/aside&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="about"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="wrap"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="section-head"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="kicker"&gt;About&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;Who I am&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p class="section-copy"&gt;Use this area for your biography. Keep it focused: who you are, how long you have been active, your signature sound, and the rooms or audiences you play for.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="about"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;article class="panel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;I’m an electronic music artist and DJ with a style built around groove, depth, and warm late-night energy. My sets move across house, melodic cuts, afro textures, and deeper club records, shaped for dance floors, rooftops, and destination venues.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p style="margin-top:14px;"&gt;Over the years I’ve worked across residencies, special events, and curated bookings, always balancing musical identity with the energy of the room. This website can act as both a public profile and a lightweight EPK for promoters, venues, and collaborators.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;aside class="panel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span class="tag"&gt;Fast facts&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;ul class="list"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;&lt;strong&gt;Genres:&lt;/strong&gt; House, progressive, afro house, melodic techno&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;&lt;strong&gt;Formats:&lt;/strong&gt; Club nights, sunset sessions, private events, guest mixes&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;&lt;strong&gt;Available assets:&lt;/strong&gt; Bio, photos, release links, technical notes, contact&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/aside&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="releases"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="wrap"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="section-head"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="kicker"&gt;Music&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;Selected releases&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p class="section-copy"&gt;Add your strongest recent releases here. You can swap these placeholders for real titles, labels, dates, and streaming links.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="release-grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;article class="panel release-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span class="tag"&gt;Single&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;Release Title One&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="muted"&gt;Label Name · 2026&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p style="margin-top:12px;"&gt;Short note about the track, mood, chart support, or where it fits in your catalog.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="hero-actions" style="margin-top:18px;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;a class="button" href="#socials"&gt;Play preview&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;article class="panel release-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span class="tag"&gt;EP / Remix&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;Release Title Two&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="muted"&gt;Independent / Label · 2025&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p style="margin-top:12px;"&gt;Use this slot for an EP, remix, compilation appearance, or featured mix with a one-line story around it.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="hero-actions" style="margin-top:18px;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;a class="button" href="#socials"&gt;Listen now&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="epk"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="wrap"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="section-head"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="kicker"&gt;EPK&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;Press kit essentials&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p class="section-copy"&gt;This section is structured like a lightweight electronic press kit so venues and media can scan what they need quickly.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="epk-grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;article class="panel epk-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;Included here&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;ul class="epk-items"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;Short bio and full bio&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;Artist highlights and recent appearances&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;Featured releases and streaming links&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;Press photos and logo pack&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;Technical rider or booth preferences&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;article class="panel epk-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;Booking details&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;ul class="epk-items"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;Booking contact: booking@email.com&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;Management / agency: add if relevant&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;Based in: Bangkok / available for travel&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;Response time: 24–48 hours&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;Social links and streaming profiles below&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="socials"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="wrap"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="section-head"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="kicker"&gt;Socials&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;SoundCloud &amp; Instagram&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p class="section-copy"&gt;Paste your real SoundCloud embed URL and Instagram profile link here. Instagram no longer offers easy native feed embeds for full profiles, so this layout links directly to your account and keeps the page clean.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="social-grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;article class="panel social-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;SoundCloud player&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="muted" style="margin-bottom:14px;"&gt;Replace the iframe source with your own track or playlist embed code.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;iframe</p>
-<p class="p1"><span class="Apple-converted-space">              </span>class="social-embed"</p>
-<p class="p1"><span class="Apple-converted-space">              </span>title="SoundCloud player"</p>
-<p class="p1"><span class="Apple-converted-space">              </span>loading="lazy"</p>
-<p class="p1"><span class="Apple-converted-space">              </span>allow="autoplay"</p>
-<p class="p1"><span class="Apple-converted-space">              </span>src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/13158665&amp;color=%2366c7c4&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true"&gt;&lt;/iframe&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;article class="panel social-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;Instagram&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="muted"&gt;Use this card as a direct social gateway.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;ul class="epk-items" style="margin-top:18px;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;&lt;a href="https://instagram.com/yourhandle" target="_blank" rel="noopener noreferrer"&gt;instagram.com/yourhandle&lt;/a&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;Add your latest media kit or story highlight notes&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;li&gt;Optional: replace this box with screenshots, flyers, or press photos&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="hero-actions" style="margin-top:20px;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;a class="button primary" href="https://instagram.com/yourhandle" target="_blank" rel="noopener noreferrer"&gt;Open Instagram&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/main&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;footer class="footer"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="wrap footer-box"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;© Your Artist Name — one-page website / EPK.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Built to be hosted for free on GitHub Pages, Netlify, or any static host.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/footer&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>(function () {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const root = document.documentElement;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const btn = document.querySelector('[data-theme-toggle]');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>let mode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>root.setAttribute('data-theme', mode);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (btn) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>btn.addEventListener('click', function () {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>mode = mode === 'dark' ? 'light' : 'dark';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>root.setAttribute('data-theme', mode);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>})();</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#top" aria-label="Artist home">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2"></circle>
+          <path d="M15 28c4-10 14-10 18 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+          <circle cx="24" cy="18" r="3.5" fill="currentColor"></circle>
+        </svg>
+        Artist Name
+      </a>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="#info">Info</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#releases">Releases</a></li>
+          <li><a href="#epk">EPK</a></li>
+          <li><a href="#socials">Socials</a></li>
+        </ul>
+      </nav>
+      <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch theme">&#9680;</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="top">
+      <div class="wrap hero">
+        <div class="hero-card">
+          <div>
+            <p class="kicker">DJ / Producer / Curator</p>
+            <h1>Your Artist Name</h1>
+            <p class="lead">A clean one-page site for your artist identity, bookings, releases, and press information. Replace this intro with a short line about your sound, city, and current direction.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="https://soundcloud.com/" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+              <a class="button" href="https://instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </div>
+          </div>
+          <p class="muted">Available for club sets, private events, branded activations, and curated music programming.</p>
+        </div>
+
+        <aside class="hero-card info-grid" id="info" aria-label="Artist info">
+          <div class="stat">
+            <strong>Base</strong>
+            <span>Bangkok, Thailand</span>
+          </div>
+          <div class="stat">
+            <strong>Style</strong>
+            <span>Deep, progressive, afro house, melodic techno</span>
+          </div>
+          <div class="stat">
+            <strong>Booking</strong>
+            <span>booking@email.com</span>
+          </div>
+          <div class="stat">
+            <strong>Highlights</strong>
+            <span>Residencies, guest sets, branded events, beach clubs, rooftops</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="kicker">About</p>
+            <h2>Who I am</h2>
+          </div>
+          <p class="section-copy">Use this area for your biography. Keep it focused: who you are, how long you have been active, your signature sound, and the rooms or audiences you play for.</p>
+        </div>
+        <div class="about">
+          <article class="panel">
+            <p>I'm an electronic music artist and DJ with a style built around groove, depth, and warm late-night energy. My sets move across house, melodic cuts, afro textures, and deeper club records, shaped for dance floors, rooftops, and destination venues.</p>
+            <p style="margin-top:14px;">Over the years I've worked across residencies, special events, and curated bookings, always balancing musical identity with the energy of the room. This website can act as both a public profile and a lightweight EPK for promoters, venues, and collaborators.</p>
+          </article>
+          <aside class="panel">
+            <span class="tag">Fast facts</span>
+            <ul class="list">
+              <li><strong>Genres:</strong> House, progressive, afro house, melodic techno</li>
+              <li><strong>Formats:</strong> Club nights, sunset sessions, private events, guest mixes</li>
+              <li><strong>Available assets:</strong> Bio, photos, release links, technical notes, contact</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="releases">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Music</p>
+            <h2>Selected releases</h2>
+          </div>
+          <p class="section-copy">Add your strongest recent releases here. You can swap these placeholders for real titles, labels, dates, and streaming links.</p>
+        </div>
+        <div class="release-grid">
+          <article class="panel release-card">
+            <span class="tag">Single</span>
+            <h3>Release Title One</h3>
+            <p class="muted">Label Name &middot; 2026</p>
+            <p style="margin-top:12px;">Short note about the track, mood, chart support, or where it fits in your catalog.</p>
+            <div class="hero-actions" style="margin-top:18px;">
+              <a class="button" href="#socials">Play preview</a>
+            </div>
+          </article>
+          <article class="panel release-card">
+            <span class="tag">EP / Remix</span>
+            <h3>Release Title Two</h3>
+            <p class="muted">Independent / Label &middot; 2025</p>
+            <p style="margin-top:12px;">Use this slot for an EP, remix, compilation appearance, or featured mix with a one-line story around it.</p>
+            <div class="hero-actions" style="margin-top:18px;">
+              <a class="button" href="#socials">Listen now</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="epk">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="kicker">EPK</p>
+            <h2>Press kit essentials</h2>
+          </div>
+          <p class="section-copy">This section is structured like a lightweight electronic press kit so venues and media can scan what they need quickly.</p>
+        </div>
+        <div class="epk-grid">
+          <article class="panel epk-card">
+            <h3>Included here</h3>
+            <ul class="epk-items">
+              <li>Short bio and full bio</li>
+              <li>Artist highlights and recent appearances</li>
+              <li>Featured releases and streaming links</li>
+              <li>Press photos and logo pack</li>
+              <li>Technical rider or booth preferences</li>
+            </ul>
+          </article>
+          <article class="panel epk-card">
+            <h3>Booking details</h3>
+            <ul class="epk-items">
+              <li>Booking contact: booking@email.com</li>
+              <li>Management / agency: add if relevant</li>
+              <li>Based in: Bangkok / available for travel</li>
+              <li>Response time: 24&ndash;48 hours</li>
+              <li>Social links and streaming profiles below</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="socials">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Socials</p>
+            <h2>SoundCloud &amp; Instagram</h2>
+          </div>
+          <p class="section-copy">Paste your real SoundCloud embed URL and Instagram profile link here. Instagram no longer offers easy native feed embeds for full profiles, so this layout links directly to your account and keeps the page clean.</p>
+        </div>
+        <div class="social-grid">
+          <article class="panel social-card">
+            <h3>SoundCloud player</h3>
+            <p class="muted" style="margin-bottom:14px;">Replace the iframe source with your own track or playlist embed code.</p>
+            <iframe
+              class="social-embed"
+              title="SoundCloud player"
+              loading="lazy"
+              allow="autoplay"
+              src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/13158665&color=%2366c7c4&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+          </article>
+          <article class="panel social-card">
+            <h3>Instagram</h3>
+            <p class="muted">Use this card as a direct social gateway.</p>
+            <ul class="epk-items" style="margin-top:18px;">
+              <li><a href="https://instagram.com/yourhandle" target="_blank" rel="noopener noreferrer">instagram.com/yourhandle</a></li>
+              <li>Add your latest media kit or story highlight notes</li>
+              <li>Optional: replace this box with screenshots, flyers, or press photos</li>
+            </ul>
+            <div class="hero-actions" style="margin-top:20px;">
+              <a class="button primary" href="https://instagram.com/yourhandle" target="_blank" rel="noopener noreferrer">Open Instagram</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-box">
+      <p>&copy; Your Artist Name &mdash; one-page website / EPK.</p>
+      <p>Built to be hosted for free on GitHub Pages, Netlify, or any static host.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const btn = document.querySelector('[data-theme-toggle]');
+      let mode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', mode);
+      if (btn) {
+        btn.addEventListener('click', function () {
+          mode = mode === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', mode);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
